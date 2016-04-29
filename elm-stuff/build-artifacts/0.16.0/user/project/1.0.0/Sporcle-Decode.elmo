@@ -1,0 +1,35 @@
+Elm.Sporcle = Elm.Sporcle || {};
+Elm.Sporcle.Decode = Elm.Sporcle.Decode || {};
+Elm.Sporcle.Decode.make = function (_elm) {
+   "use strict";
+   _elm.Sporcle = _elm.Sporcle || {};
+   _elm.Sporcle.Decode = _elm.Sporcle.Decode || {};
+   if (_elm.Sporcle.Decode.values) return _elm.Sporcle.Decode.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Json$Decode = Elm.Json.Decode.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var stringTuple = A3($Json$Decode.tuple2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),$Json$Decode.string,$Json$Decode.string);
+   var JsonModel = F5(function (a,b,c,d,e) {    return {name: a,time: b,entries: c,cols: d,fields: e};});
+   var completeDecoder = A6($Json$Decode.object5,
+   JsonModel,
+   A2($Json$Decode._op[":="],"name",$Json$Decode.string),
+   A2($Json$Decode._op[":="],"time",$Json$Decode.$float),
+   A2($Json$Decode._op[":="],"entries",$Json$Decode.$int),
+   A2($Json$Decode._op[":="],"cols",$Json$Decode.list($Json$Decode.string)),
+   A2($Json$Decode._op[":="],
+   "fields",
+   $Json$Decode.list(A5($Json$Decode.tuple4,
+   F4(function (v0,v1,v2,v3) {    return {ctor: "_Tuple4",_0: v0,_1: v1,_2: v2,_3: v3};}),
+   $Json$Decode.string,
+   $Json$Decode.string,
+   $Json$Decode.string,
+   $Json$Decode.bool))));
+   var extractString = A2($Json$Decode.tuple1,$Basics.identity,$Json$Decode.string);
+   return _elm.Sporcle.Decode.values = {_op: _op,completeDecoder: completeDecoder,stringTuple: stringTuple,JsonModel: JsonModel};
+};

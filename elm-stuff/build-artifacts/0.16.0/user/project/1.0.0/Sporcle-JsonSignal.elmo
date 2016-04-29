@@ -1,0 +1,41 @@
+Elm.Sporcle = Elm.Sporcle || {};
+Elm.Sporcle.JsonSignal = Elm.Sporcle.JsonSignal || {};
+Elm.Sporcle.JsonSignal.make = function (_elm) {
+   "use strict";
+   _elm.Sporcle = _elm.Sporcle || {};
+   _elm.Sporcle.JsonSignal = _elm.Sporcle.JsonSignal || {};
+   if (_elm.Sporcle.JsonSignal.values) return _elm.Sporcle.JsonSignal.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Http = Elm.Http.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Sporcle$Decode = Elm.Sporcle.Decode.make(_elm),
+   $Task = Elm.Task.make(_elm);
+   var _op = {};
+   var jsonData = function (fromMail) {
+      var json = function (x) {
+         var _p0 = x;
+         if (_p0.ctor === "Err") {
+               return _U.crashCase("Sporcle.JsonSignal",{start: {line: 32,column: 18},end: {line: 34,column: 24}},_p0)("we errored out along the way");
+            } else {
+               return _p0._0;
+            }
+      };
+      return json(fromMail);
+   };
+   var transformHTTP = function (err) {
+      var _p2 = err;
+      switch (_p2.ctor)
+      {case "Timeout": return "Timeout";
+         case "NetworkError": return "NetworkError";
+         case "UnexpectedPayload": return A2($Basics._op["++"],"UnexpectedPayload ",_p2._0);
+         default: return A2($Basics._op["++"],"BadResponse ",_p2._1);}
+   };
+   var jsonFile = function (s) {    return A2($Basics._op["++"],"http://localhost:8000/json/",A2($Basics._op["++"],s,".json"));};
+   var getter = function (s) {    return A2($Http.get,$Sporcle$Decode.completeDecoder,jsonFile(s));};
+   return _elm.Sporcle.JsonSignal.values = {_op: _op,getter: getter,jsonFile: jsonFile,transformHTTP: transformHTTP,jsonData: jsonData};
+};

@@ -1,0 +1,25 @@
+{
+    "name" : "Dunder Mifflin Employees",
+    "time" : 3.0,
+    "entries" : 17,
+    "cols" : ["Title", "Name"],
+    "fields" : [
+        ["Regional Manager", "Michael Scott", "Michael", false],
+        ["Assistant (to the) Regional Manager", "Dwight Schrute", "Dwight", false],
+        ["Sales Rep", "Jim Halpert", "Jim", false],
+        ["Office Administrator", "Pam Beasley", "Pam", false],
+        ["Temp/Salesman/former V.P., Regional Sales", "Ryan Howard", "Ryan", false],
+        ["Accountant Supervisor", "Angela Martin", "Angela", false],
+        ["Accountant", "Kevin Malone", "Kevin", false],
+        ["Accountant", "Oscar Martinez", "Oscar", false],
+        ["Sales Rep", "Stanley Hudson", "Stanley", false],
+        ["Sales Rep", "Phyllis Lapin", "Phyllis", false],
+        ["Regional Director of Sales", "Andy Bernard", "Andy", false],
+        ["Supplier Relations", "Meredith Palmer", "Meredith", false],
+        ["Customer Service", "Kelly Kapoor", "Kelly", false],
+        ["Q.A. Officer/Blogger", "Creed Bratton", "Creed", false],
+        ["Human Resources", "Toby Flenderson", "Toby", false],
+        ["Warehouse Supervisor", "Darryl Philbin", "Darryl", false],
+        ["Receptionist", "Erin Hannon", "Erin", false]
+    ]
+}

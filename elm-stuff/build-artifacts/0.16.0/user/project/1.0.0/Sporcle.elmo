@@ -1,0 +1,89 @@
+Elm.Sporcle = Elm.Sporcle || {};
+Elm.Sporcle.make = function (_elm) {
+   "use strict";
+   _elm.Sporcle = _elm.Sporcle || {};
+   if (_elm.Sporcle.values) return _elm.Sporcle.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Graphics$Input = Elm.Graphics.Input.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Sporcle$Decode = Elm.Sporcle.Decode.make(_elm),
+   $Sporcle$JsonSignal = Elm.Sporcle.JsonSignal.make(_elm),
+   $Sporcle$Mailer = Elm.Sporcle.Mailer.make(_elm),
+   $Sporcle$Views = Elm.Sporcle.Views.make(_elm),
+   $Task = Elm.Task.make(_elm);
+   var _op = {};
+   var genFrontList = function (ts) {
+      var _p0 = ts;
+      if (_p0.ctor === "[]") {
+            return _U.list([]);
+         } else {
+            var _p1 = _p0._0;
+            return A2($List._op["::"],
+            $Html.fromElement(A2($Graphics$Input.button,A2($Signal.message,$Sporcle$Mailer.quizNameMailer.address,_p1),$Basics.fst(_p1))),
+            genFrontList(_p0._1));
+         }
+   };
+   var forwarder1 = function (_p2) {    var _p3 = _p2;return A2($Signal.send,$Sporcle$Mailer.quizMailer.address,_p3._0);};
+   var u1 = Elm.Native.Task.make(_elm).performSignal("u1",A2($Signal.map,forwarder1,$Sporcle$Mailer.viewMailer.signal));
+   var forwarder = function (_p4) {    var _p5 = _p4;return A2($Signal.send,$Sporcle$Mailer.textBoxMailer.address,_p5._1);};
+   var updater = Elm.Native.Task.make(_elm).performSignal("updater",A2($Signal.map,forwarder,$Sporcle$Mailer.viewMailer.signal));
+   var quizzes = _U.list([{ctor: "_Tuple2",_0: "Dunder Mifflin",_1: "dunder"},{ctor: "_Tuple2",_0: "Pixar",_1: "pixar"}]);
+   var view = F3(function (choose,textbox,quiz) {
+      var _p6 = quiz;
+      if (_p6.ctor === "Err") {
+            return A2($Html.div,
+            _U.list([]),
+            _U.list([A2($Html.h2,_U.list([$Sporcle$Views.myStyle]),_U.list([$Html.text("Quizcle Quizzes")])),A2($Html.div,_U.list([]),genFrontList(quizzes))]));
+         } else {
+            var q = $Sporcle$JsonSignal.jsonData(quiz);
+            var updated = _U.update(q,{fields: A2($Sporcle$Views.showField,textbox,q.fields)});
+            var quizData = $Sporcle$Views.quizToDiv(updated);
+            var i = A2($Html.input,
+            _U.list([$Html$Attributes.placeholder("Type your answers here")
+                    ,$Html$Attributes.value(textbox)
+                    ,A3($Html$Events.on,
+                    "input",
+                    $Html$Events.targetValue,
+                    function (s) {
+                       return A2($Signal.message,$Sporcle$Mailer.viewMailer.address,{ctor: "_Tuple2",_0: $Result.Ok(updated),_1: !_U.eq(q,updated) ? "" : s});
+                    })
+                    ,$Sporcle$Views.myStyle]),
+            _U.list([]));
+            return A2($Html.div,
+            _U.list([]),
+            _U.list([i
+                    ,A2($Html.div,
+                    _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "float",_1: "left"}]))]),
+                    _U.list([$Html.fromElement(A2($Graphics$Input.button,
+                    A2($Signal.message,$Sporcle$Mailer.quizMailer.address,$Result.Err("")),
+                    "Select another quiz"))]))
+                    ,quizData]));
+         }
+   });
+   var main = A4($Signal.map3,view,$Sporcle$Mailer.quizNameMailer.signal,$Sporcle$Mailer.textBoxMailer.signal,$Sporcle$Mailer.quizMailer.signal);
+   var getQuiz = function (s) {
+      return A2($List.member,s,quizzes) ? A2($Task.mapError,$Sporcle$JsonSignal.transformHTTP,$Sporcle$JsonSignal.getter($Basics.snd(s))) : $Task.fail("error");
+   };
+   var results = Elm.Native.Task.make(_elm).performSignal("results",
+   A2($Signal.map,
+   function (task) {
+      return A2($Task.andThen,$Task.toResult(task),$Signal.send($Sporcle$Mailer.quizMailer.address));
+   },
+   A2($Signal.map,getQuiz,$Sporcle$Mailer.quizNameMailer.signal)));
+   return _elm.Sporcle.values = {_op: _op
+                                ,quizzes: quizzes
+                                ,main: main
+                                ,view: view
+                                ,getQuiz: getQuiz
+                                ,forwarder: forwarder
+                                ,forwarder1: forwarder1
+                                ,genFrontList: genFrontList};
+};

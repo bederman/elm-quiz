@@ -1,0 +1,22 @@
+EXPERIENCE w/ELM:
+I would have been really nice if Elm had a way to do IO with local files instead of having to send off an HTTP request. The other problem was trying to figure out how to make an event send mail to two different mailboxes. It was really a pain. In the end, we created another mailbox and then two ports and two forwarding functions to the original mailboxes. We had approached it with the idea of chaining together the tasks, but that didn’t really work. There doesn’t seem to be a function for running a task and throwing away the result then running another one -- only for chaining together the result.
+
+Evan’s HTML and HTTP libraries are super useful and well documented. We didn’t have any serious problems getting the functions to work properly (what problems we had were more user error than anything else). It is interesting that the HTML library isn’t a part of core. I guess that’s to keep you from having the files sit around when you don’t need them, but it seems a little silly. It’s super useful.
+
+The Json.Decode module is easy to use and understand, but makes it all the more curious why there isn’t an easy way to do IO. Decoders are pretty cool though!
+
+After we had functionality covered, we spent some time working on improving the project’s UI. A great find was the circuithub/elm-bootstrap-html module. It required a little extra reading through circuithub’s Html shorthand module to figure out functionality, but it makes it fairly straightforward to wrap our existing Html functions with this extra formatting. Unfortunately, we didn't have time to fully implement this by submission time. Nothing broke when adding, but it didn't fully style properly so we didn't feel comfortable adding it into the final submission. We'll keep playing with it and may have something prettier to demo than this submission, but it has zero impact on functionality.
+
+WHAT WE DID:
+We spent a considerable amount of time trying to get the JSON file imported into our Elm code. That was definitely the hardest part. We had some issues getting the correct url, but once we did, it wasn’t too bad. After it was actually in, all it took was a few functions to convert that JSON into HTML.
+
+The second hardest thing was figuring out how to keep updating the view. After experimenting with a few different things, we settled on just using mailboxes for everything (though not for a bool of whether or not we are on the front page. That took a bit to figure out). There are mailboxes for the quiz name, the actual quiz JSON representation, the text box, and one for the view to report the current state of affairs to (we had to add that one so that we could have the text box update the quiz representation. Couldn’t figure out another way to create persistence inside of the quiz without just sending the updated quiz back to the quiz mailbox).
+
+We really thought there would be a lot more use of the Signal library, but it turned out to only be things related to ports and to mailboxes. Weird. Probably should have put it together a bit differently, but it works. Probably should have used some sort of state signal and updated it with a new quiz representation. Anwyay.
+
+Even though we’d been working for a while, we didn’t actually get anything displaying on the page until about five days ago. A lot of time was spent getting things up and working in the back end, and almost half the code that was written had something to do with getting the quiz imported from the file into the program.
+
+It would have been really cool to get another page where you could create a new quiz. Maybe one of us will implement that soon! Also, someone really needs to implement the Haskell IO monad in Elm!
+
+Modules we discovered too late to use:
+etaque/elm-transit

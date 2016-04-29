@@ -1,0 +1,31 @@
+{
+    "name" : "DC Characters",
+    "time" : 3.0,
+    "entries" : 44,
+    "cols" : ["Secret Identity", "Character"],
+    "fields" : [
+        ["Bruce Wayne", "Batman", "Batman", false],
+        ["Dick Grayson", "Nightwing", "Nightwing", false],
+        ["Jason Todd", "Red Hood", "Red Hood", false],
+        ["Damian Wayne", "Robin", "Robin", false],
+        ["Tim Drake", "Red Robin", "Red Robin", false],
+        ["Barbara Gordon", "Batgirl", "Batgirl", false],
+        ["Selina Kyle", "Catwoman", "Catwoman", false],
+        ["Clark Kent", "Superman", "Superman", false],
+        ["Harvey Dent", "Two-Face", "Two-Face", false],
+        ["Oswald Cobblepot", "Penguin", "Penguin", false],
+        ["Lazlo Valentin", "Professor Pyg", "Professor Pyg", false],
+        ["Slade Wilson", "Deathstroke", "Deathstroke", false],
+        ["Edward Nygma", "Riddler", "Riddler", false],
+        ["Harleen Quinzel", "Harley Quinn", "Harley Quinn", false],
+        ["Oliver Queen", "Green Arrow", "Green Arrow", false],
+        ["Barry Allen", "The Flash", "The Flash", false],
+        ["Wally West", "Kid Flash", "Kid Flash", false],
+        ["Dinah Lance", "Black Canary", "Black Canary", false],
+        ["Diana Prince", "Wonderwoman", "Wonderwoman", false],
+        ["Hal Jordan", "Green Lantern", "Green Lantern", false],
+        ["Victor Stone", "Cyborg", "Cyborg", false],
+        ["Terry McGinnis", "Batman Beyond", "Batman Beyond", false],
+        ["Connor Kent", "Superboy", "Superboy", false]
+        ]
+}

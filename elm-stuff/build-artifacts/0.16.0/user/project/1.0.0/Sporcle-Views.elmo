@@ -1,0 +1,76 @@
+Elm.Sporcle = Elm.Sporcle || {};
+Elm.Sporcle.Views = Elm.Sporcle.Views || {};
+Elm.Sporcle.Views.make = function (_elm) {
+   "use strict";
+   _elm.Sporcle = _elm.Sporcle || {};
+   _elm.Sporcle.Views = _elm.Sporcle.Views || {};
+   if (_elm.Sporcle.Views.values) return _elm.Sporcle.Views.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Sporcle$Decode = Elm.Sporcle.Decode.make(_elm),
+   $String = Elm.String.make(_elm);
+   var _op = {};
+   var makeHeaders = function (s) {
+      return A2($Html.th,_U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid black"}]))]),_U.list([$Html.text(s)]));
+   };
+   var makeRow = function (_p0) {
+      var _p1 = _p0;
+      var a = _p1._3 ? _p1._1 : " ";
+      return A2($Html.tr,
+      _U.list([]),
+      _U.list([A2($Html.td,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid black"},{ctor: "_Tuple2",_0: "width",_1: "75%"}]))]),
+              _U.list([$Html.text(_p1._0)]))
+              ,A2($Html.td,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "border",_1: "1px solid black"}
+                                                      ,{ctor: "_Tuple2",_0: "width",_1: "25%"}
+                                                      ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}]))]),
+              _U.list([$Html.text(a)]))]));
+   };
+   var showField = F2(function (s,jm) {
+      var _p2 = jm;
+      if (_p2.ctor === "::") {
+            var _p6 = _p2._0._2;
+            var _p5 = _p2._1;
+            var _p4 = _p2._0._1;
+            var _p3 = _p2._0._0;
+            return A2($String.contains,$String.toLower(_p6),$String.toLower(s)) && !_U.eq(s,"") ? A2($List._op["::"],
+            {ctor: "_Tuple4",_0: _p3,_1: _p4,_2: _p6,_3: true},
+            A2(showField,s,_p5)) : A2($List._op["::"],{ctor: "_Tuple4",_0: _p3,_1: _p4,_2: _p6,_3: _p2._0._3},A2(showField,s,_p5));
+         } else {
+            return _U.list([]);
+         }
+   });
+   var altStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "70%"}
+                                                 ,{ctor: "_Tuple2",_0: "margin",_1: "auto"}
+                                                 ,{ctor: "_Tuple2",_0: "height",_1: "30px"}
+                                                 ,{ctor: "_Tuple2",_0: "padding",_1: "0 10px 0 10px"}
+                                                 ,{ctor: "_Tuple2",_0: "font-size",_1: "1.25em"}
+                                                 ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}]));
+   var quizToDiv = function (jm) {
+      return A2($Html.div,
+      _U.list([altStyle]),
+      _U.list([A2($Html.table,
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "100%"},{ctor: "_Tuple2",_0: "border",_1: "1px solid black"}]))]),
+      A2($Basics._op["++"],_U.list([A2($Html.tr,_U.list([]),A2($List.map,makeHeaders,jm.cols))]),A2($List.map,makeRow,jm.fields)))]));
+   };
+   var myStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "100%"}
+                                                ,{ctor: "_Tuple2",_0: "height",_1: "30px"}
+                                                ,{ctor: "_Tuple2",_0: "padding",_1: "10px 0"}
+                                                ,{ctor: "_Tuple2",_0: "font-size",_1: "2em"}
+                                                ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}]));
+   return _elm.Sporcle.Views.values = {_op: _op
+                                      ,myStyle: myStyle
+                                      ,altStyle: altStyle
+                                      ,showField: showField
+                                      ,quizToDiv: quizToDiv
+                                      ,makeRow: makeRow
+                                      ,makeHeaders: makeHeaders};
+};
